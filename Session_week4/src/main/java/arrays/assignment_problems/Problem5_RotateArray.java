@@ -1,3 +1,5 @@
+package arrays.assignment_problems;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
