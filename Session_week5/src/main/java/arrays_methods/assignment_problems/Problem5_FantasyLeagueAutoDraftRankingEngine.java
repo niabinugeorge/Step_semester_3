@@ -1,8 +1,23 @@
+package arrays_methods.assignment_problems;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+/**
+ * Problem 5 (Advanced): Fantasy League Auto-Draft Ranking Engine
+ *
+ * A Player is draftable if EITHER:
+ *   - they clear the experience-only bar (matchesPlayed >= 10), regardless
+ *     of fitness — established players qualify on track record alone; OR
+ *   - they clear the combined bar for newer players (matchesPlayed >= 5
+ *     AND not injured).
+ *
+ * Draftable players are ranked by battingAverage descending (the value
+ * used as each player's "fantasy points" here, since no separate points
+ * field is supplied) using Player's own Comparable implementation, so
+ * Arrays.sort(...) does all the ranking work with no extra comparator.
+ */
 public class Problem5_FantasyLeagueAutoDraftRankingEngine {
 
     static class Player implements Comparable<Player> {
@@ -30,7 +45,10 @@ public class Problem5_FantasyLeagueAutoDraftRankingEngine {
             return injured;
         }
 
-
+        /**
+         * Ranks players by battingAverage descending, so a plain
+         * Arrays.sort(...) produces the highest scorer first.
+         */
         @Override
         public int compareTo(Player other) {
             return Double.compare(other.battingAverage, this.battingAverage);
@@ -42,16 +60,37 @@ public class Problem5_FantasyLeagueAutoDraftRankingEngine {
         }
     }
 
-
+    /**
+     * Experience-only draft rule for established players: qualifies on
+     * track record alone, regardless of current fitness.
+     *
+     * @param matchesPlayed number of matches the player has played
+     * @return true if the player clears the experience-only bar
+     */
     static boolean isDraftable(int matchesPlayed) {
         return matchesPlayed >= 10;
     }
 
+    /**
+     * Combined rule for newer players: needs reasonable experience AND
+     * to be currently fit.
+     *
+     * @param matchesPlayed number of matches the player has played
+     * @param injured       whether the player is currently injured
+     * @return true if the player clears the combined bar
+     */
     static boolean isDraftable(int matchesPlayed, boolean injured) {
         return matchesPlayed >= 5 && !injured;
     }
 
-  
+    /**
+     * Filters players down to the draftable ones (matching either
+     * isDraftable rule) and ranks them by fantasy points (battingAverage)
+     * descending using Player's natural ordering.
+     *
+     * @param players the full pool of players to consider
+     * @return a formatted, ranked string like "1. Name | 2. Name | ..."
+     */
     static String draftAndRank(Player[] players) {
         List<Player> draftablePlayers = new ArrayList<>();
 
@@ -66,6 +105,8 @@ public class Problem5_FantasyLeagueAutoDraftRankingEngine {
 
         Player[] draftableArray = draftablePlayers.toArray(new Player[0]);
 
+        // Player implements Comparable<Player>, so this single call
+        // ranks everyone by fantasy points (battingAverage) descending.
         Arrays.sort(draftableArray);
 
         StringBuilder result = new StringBuilder();
@@ -80,6 +121,7 @@ public class Problem5_FantasyLeagueAutoDraftRankingEngine {
     }
 
     public static void main(String[] args) {
+        // Sample Input -> 1. Rahul | 2. Virat | 3. Dev
         System.out.println("Test Case 1:");
         Player[] players = {
                 new Player("Virat", 15, 48.0, false),
