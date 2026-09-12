@@ -1,7 +1,25 @@
+package control_flow.assignment_problems;
+
 import java.util.Scanner;
 
+/**
+ * Level 3 - P5: Guess the Number Game
+ *
+ * Simulates a guessing game: player guesses the secret number within a
+ * fixed number of tries, getting "Too high" / "Too low" hints, using a
+ * while loop with a try counter and a success flag.
+ */
 public class Problem5_GuessTheNumberGame {
 
+    /**
+     * Runs through a sequence of guesses against a secret number, printing
+     * a hint after each guess, until the number is guessed correctly or
+     * the tries run out.
+     *
+     * @param secretNumber the number the player is trying to guess
+     * @param maxTries     the maximum number of tries allowed
+     * @param guesses      the player's guesses, in order
+     */
     static void guessTheNumber(int secretNumber, int maxTries, int[] guesses) {
         int tryCount = 0;
         boolean guessedCorrectly = false;
@@ -28,15 +46,15 @@ public class Problem5_GuessTheNumberGame {
     }
 
     public static void main(String[] args) {
-        
+        // Sample Input 1 -> Too low, Too high, Correct! You guessed it
         System.out.println("Test Case 1:");
         guessTheNumber(42, 4, new int[]{20, 60, 42});
 
-        
+        // Sample Input 2 -> Too low, Too low, Out of tries — the number was 42
         System.out.println("\nTest Case 2:");
         guessTheNumber(42, 2, new int[]{10, 15});
 
-        
+        // Optional: custom input from user
         Scanner sc = new Scanner(System.in);
         System.out.println("\nEnter the secret number (or -1 to skip): ");
         int customSecret = sc.hasNextInt() ? sc.nextInt() : -1;
