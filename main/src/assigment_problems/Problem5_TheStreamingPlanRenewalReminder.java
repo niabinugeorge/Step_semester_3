@@ -1,4 +1,4 @@
-package polymorphism.assigment_problems;
+package assigment_problems;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

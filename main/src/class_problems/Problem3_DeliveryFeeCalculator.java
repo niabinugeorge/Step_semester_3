@@ -1,4 +1,4 @@
-package polymorphism.class_problems;
+package class_problems;
 
 import java.util.ArrayList;
 import java.util.List;

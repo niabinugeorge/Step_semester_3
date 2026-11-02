@@ -1,4 +1,4 @@
-package polymorphism.assigment_problems;
+package assigment_problems;
 
 import java.util.ArrayList;
 import java.util.List;
